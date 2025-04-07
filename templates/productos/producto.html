@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <h2>{{ titulo }}</h2>
+    <div class="row row-cols-1 row-cols-md-2 mb-3 text-center">
+        <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h1 class="my-0 fw-formal">{{producto.nombre}}</h1>
+            </div>
+
+                {% comment %} <img src="{{producto.imgGrande.url}}" alt="X"> {% endcomment %}
+
+            <div class="card-body">
+                <h2 class="Card subtitle pricing-card-title">${{producto.precioUnitario}}</h2>
+                <h4 class="text-muted fw-light"> - {{producto.unidad}}</h4>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li><p>{{producto.descripcion}}</p></li>
+                    <li><p>{{producto.existencia}} en existencia</p></li>
+                </ul>
+                {% comment %} <a href="{% url 'agregarCarro' producto.id %}" type="button"
+                class="w-100 btn btn-lg btn-outline-primary">Agregar al
+                carrito</a> {% endcomment %}
+            </div>
+        </div>
+
+    </div>
+{% endblock  %}
+

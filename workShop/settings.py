@@ -87,6 +87,10 @@ DATABASES = {
     }
 }
 
+##MEDIA FILES
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -106,6 +110,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+##EMAILLL
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS') 
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/

@@ -1,4 +1,5 @@
 from django.db import models
+from appUsuarios.models import Usuario
 
 class Categoria(models.Model):
     descripCategoria = models.CharField(max_length=45)
@@ -23,6 +24,23 @@ class Producto(models.Model):
 
     def __str__(self): ## El método ‘ str ()’ es utilizado para definir que atributos (columnas) mostrar cuando se esté desplegando un objeto (fila)
         return self.nombre
+    
+
+class Carrito(models.Model):
+    ESTADO_PROD = (
+        ('activo','activo'),
+        ('comprado', 'comprado'),
+        ('anulado', 'anulado')
+    )
+
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=False)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE, null=False)
+    cantidad = models.IntegerField(null=False, default=1)
+    valUnit = models.DecimalField(max_digits=8, decimal_places=2)
+    estado = models.CharField(max_length=20, choices=ESTADO_PROD, default='activo')
+
+    def __str__(self):
+        return self.estado
     
 
 

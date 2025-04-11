@@ -8,7 +8,7 @@
                 <h1 class="my-0 fw-formal">{{producto.nombre}}</h1>
             </div>
 
-                {% comment %} <img src="{{producto.imgGrande.url}}" alt="X"> {% endcomment %}
+                <img src="{{producto.imgGrande.url}}" alt="X">
 
             <div class="card-body">
                 <h2 class="Card subtitle pricing-card-title">${{producto.precioUnitario}}</h2>
@@ -17,9 +17,9 @@
                     <li><p>{{producto.descripcion}}</p></li>
                     <li><p>{{producto.existencia}} en existencia</p></li>
                 </ul>
-                {% comment %} <a href="{% url 'agregarCarro' producto.id %}" type="button"
+                <a href="{% url 'agregarCarro' producto.id %}" type="button"
                 class="w-100 btn btn-lg btn-outline-primary">Agregar al
-                carrito</a> {% endcomment %}
+                carrito</a>
             </div>
         </div>
 

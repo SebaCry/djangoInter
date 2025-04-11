@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
 from django.http import JsonResponse
 from .models import Categoria, Producto, Carrito
 import json
@@ -142,3 +144,26 @@ def consultarCarrito(request):
     }
 
     return context
+
+def pagarCarrito(request):
+    context = consultarCarrito(request)
+    regUsuario = request.user
+    nombreUsuario = str(regUsuario)
+    context['nombre'] = nombreUsuario
+    correo = regUsuario.email
+
+    mail_subject = 'Factura de compra'
+
+    body = render_to_string('productos/html_email.html', context)
+    to_email = [correo]
+
+    send_email = EmailMessage(mail_subject, body, to=[correo])
+    send_email.content_subtype = 'html'
+    send_email.send()
+
+    listaCarrito = Carrito.objects.filter(usuario=regUsuario, estado = 'activo')
+    for regCarro in listaCarrito:
+        regCarro.estado = 'comprado'
+        regCarro.save()
+
+    return verCategoria(request)
